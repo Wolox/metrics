@@ -1,0 +1,13 @@
+{
+  "extends": "@wolox/eslint-config",
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 110,
+        "singleQuote": true,
+        "trailingComma": "none"
+      }
+    ]
+  }
+}
