@@ -22,7 +22,7 @@ module.exports = (authToken) => async (repository, organization) => {
     // eslint-disable-next-line no-console
     console.log(`Error: \n ${e}`);
     gitData.push({
-      metric: 'GITHUB',
+      metric: 'GITLAB',
       description: 'Error de git',
       value: ERROR.REPO_NOT_FOUND
     });

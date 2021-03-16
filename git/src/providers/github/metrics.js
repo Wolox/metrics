@@ -15,7 +15,7 @@ exports.pullRequestLifeSpan = (gitResponse) => {
 
   // Round to 2 decimals
   // eslint-disable-next-line no-magic-numbers
-  return mergedPRs.length > 0 ? Math.round((hours / mergedPRs.length) * 100) / 100 : NaN;
+  return mergedPRs.length > 0 ? Math.round((hours / mergedPRs.length) * 100) / 100 : null;
 };
 
 exports.pickUpTime = (gitResponse) => {
@@ -35,5 +35,5 @@ exports.pickUpTime = (gitResponse) => {
 
   // Round to 2 decimals
   // eslint-disable-next-line no-magic-numbers
-  return pullRequests.length > 0 ? Math.round((hoursUntilPickup / pullRequests.length) * 100) / 100 : NaN;
+  return pullRequests.length > 0 ? Math.round((hoursUntilPickup / pullRequests.length) * 100) / 100 : null;
 };

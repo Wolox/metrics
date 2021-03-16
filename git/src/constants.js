@@ -1,7 +1,8 @@
-const createObject = (keyArray) => keyArray.reduce((acc, key) => ({ ...acc, [key]: key }), {});
-
 module.exports = {
-  gitMetrics: createObject(['CODE_REVIEW_AVG_TIME', 'PICK_UP_TIME']),
+  gitMetrics: {
+    CODE_REVIEW_AVG_TIME: 'code-review-avg-time',
+    PICK_UP_TIME: 'pick-up-time'
+  },
   PROVIDERS: {
     github: 'github',
     gitlab: 'gitlab'

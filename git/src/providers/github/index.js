@@ -8,22 +8,21 @@ module.exports = (authToken) => async (repository, organization) => {
   try {
     const repositoryInfo = await getRepositoryInfo(repository, organization, authToken);
     gitData.push({
-      metric: gitMetrics.CODE_REVIEW_AVG_TIME,
-      description: 'Promedio de existencia de PR hasta merge - Hs',
-      value: pullRequestLifeSpan(repositoryInfo)
+      name: gitMetrics.CODE_REVIEW_AVG_TIME,
+      value: pullRequestLifeSpan(repositoryInfo),
+      version: '1.0'
     });
 
     gitData.push({
-      metric: gitMetrics.PICK_UP_TIME,
-      description: 'Pick up Time',
-      value: pickUpTime(repositoryInfo)
+      name: gitMetrics.PICK_UP_TIME,
+      value: pickUpTime(repositoryInfo),
+      version: '1.0'
     });
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log(`Error: \n ${e}`);
     gitData.push({
-      metric: 'GITHUB',
-      description: 'Git error',
+      name: 'GITHUB',
       value: ERROR.REPO_NOT_FOUND
     });
   }

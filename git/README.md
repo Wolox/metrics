@@ -1,6 +1,6 @@
 # GIT metrics
 
-A utility to calculate GIT metrics
+A utility to calculate GIT metrics.
 
 ## Installation
 
@@ -16,7 +16,7 @@ This package returns a single function. This function is a sort of factory that 
 
 ### Parameters
 
-```
+```js
 const gitMetrics = require('git-metrics');
 
 const accessToken = 'a valid access token from your provider'
@@ -49,13 +49,13 @@ The return value consists of a metric name, a description and the value.
 ```js
 [
   { 
-    metric: 'CODE_REVIEW_AVG_TIME',
-    description: 'Promedio de existencia de PR hasta merge - Hs',
+    name: 'code-review-avg-time',
+    version: '1.0',
     value: 56.15 
   },
   { 
-    metric: 'PICK_UP_TIME',
-    description: 'Pick up Time',
+    name: 'pick-up-time',
+    version: '1.0',
     value: 36.02 
   }
 ]
@@ -63,8 +63,10 @@ The return value consists of a metric name, a description and the value.
 
 For the time being we support the following metrics:
 
-- `CODE_REVIEW_AVG_TIME`: Time (in hours) between the PR/MR is created and merged
-- `PICK_UP_TIME`: Time (in hours) between the PR/MR is created and it's first reviewed
+- `code-review-avg-time`: Time (in hours) between the PR/MR is created and merged
+- `pick-up-time`: Time (in hours) between the PR/MR is created and it's first reviewed
+
+**Note**: Metric values can return `undefined`. You should handle that scenario on your own.
 
 ## Licence
 

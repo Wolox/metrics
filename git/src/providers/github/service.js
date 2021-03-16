@@ -12,13 +12,6 @@ const createHeaders = (authToken) => ({
 const repositoryInfoQuery = (repository, organization) => ({
   query: `{
       repository(owner:"${organization}", name:"${repository}") {
-        refs(refPrefix: "refs/heads/", first: 100) {
-          edges {
-            node {
-              name
-            }
-          }
-        }
         pullRequests(last: 100) {
           edges {
             node {
