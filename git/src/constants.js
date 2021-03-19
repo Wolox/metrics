@@ -6,5 +6,8 @@ module.exports = {
   PROVIDERS: {
     github: 'github',
     gitlab: 'gitlab'
+  },
+  ERROR: {
+    REPO_NOT_FOUND: 'ERROR: Could not find repository'
   }
 };
