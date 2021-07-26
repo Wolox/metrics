@@ -1,7 +1,7 @@
 {
   "name": "@wolox/js-test-coverage-script",
   "version": "0.0.1",
-  "description": "Script to retrieve lcov test coverage and put into ",
+  "description": "Script to retrieve lcov test coverage and put into code_coverage.json file in project's root folder.",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
