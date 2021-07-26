@@ -19,6 +19,6 @@
     "chalk": "^4.1.1"
   },
   "bin": {
-    "metrics-test-coverage": "./src/index.js"
+    "js-metrics-test-coverage": "./src/index.js"
   }
 }
