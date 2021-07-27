@@ -44,7 +44,7 @@ getGithubMetrics(repositoryName, organizationName).then(metrics => {
 
 ### Return value
 
-The return value consists of a metric name, a description and the value.
+The return value consists of a list of PRs, each with their respective pick up time and code review time.
 
 ```js
 [
