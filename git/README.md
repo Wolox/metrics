@@ -44,27 +44,25 @@ getGithubMetrics(repositoryName, organizationName).then(metrics => {
 
 ### Return value
 
-The return value consists of a list of PRs, each with their respective pick up time and code review time.
+The return value consists of a list of the PRs that were closed in the last 14 days. Each with their respective pick up time and code review time.
 
 ```js
 [
   { 
-    name: 'code-review-avg-time',
-    version: '1.0',
-    value: 56.15 
+    reviewTime: 20
+    pickUpTime: 10
   },
   { 
-    name: 'pick-up-time',
-    version: '1.0',
-    value: 36.02 
+    reviewTime: 5
+    pickUpTime: 2
   }
 ]
 ```
 
 For the time being we support the following metrics:
 
-- `code-review-avg-time`: Time (in hours) between the PR/MR is created and merged
-- `pick-up-time`: Time (in hours) between the PR/MR is created and it's first reviewed
+- `reviewTime`: Time (in hours) between the PR/MR is created and merged
+- `pickUpTime`: Time (in hours) between the PR/MR is created and it's first reviewed
 
 **Note**: Metric values can return `undefined`. You should handle that scenario on your own.
 
