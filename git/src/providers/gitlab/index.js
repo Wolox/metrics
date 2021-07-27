@@ -1,15 +1,15 @@
 const { getRepositoryInfo } = require('./service');
-const { getHoursBetween, getSevenDaysAgo } = require('../utils');
+const { getHoursBetween, getTimelapse } = require('../utils');
 
 module.exports = (authToken) => async (repository, organization) => {
   try {
     const repositoryInfo = await getRepositoryInfo(repository.toLowerCase(), organization, authToken);
 
     const mergeRequests = repositoryInfo.data.data.project.mergeRequests.edges;
-    const sevenDaysAgo = getSevenDaysAgo();
+    const timelapse = getTimelapse();
 
     const response = mergeRequests
-      .filter((mr) => mr.node.state === 'merged' && mr.node.createdAt > sevenDaysAgo)
+      .filter((mr) => mr.node.state === 'merged' && mr.node.createdAt > timelapse)
       .map(({ node }) => ({
         reviewTime: getHoursBetween(node.createdAt, node.mergedAt),
         pickUpTime: getHoursBetween(
