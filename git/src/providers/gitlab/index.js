@@ -11,8 +11,8 @@ module.exports = (authToken) => async (repository, organization) => {
     const response = mergeRequests
       .filter((mr) => mr.node.state === 'merged' && mr.node.createdAt > timelapse)
       .map(({ node }) => ({
-        reviewTime: getHoursBetween(node.createdAt, node.mergedAt),
-        pickUpTime: getHoursBetween(
+        review_time: getHoursBetween(node.createdAt, node.mergedAt),
+        pick_up_time: getHoursBetween(
           node.createdAt,
           node.discussions.edges[0] && node.discussions.edges[0].node.createdAt
         )

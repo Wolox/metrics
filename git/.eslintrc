@@ -8,6 +8,12 @@
         "singleQuote": true,
         "trailingComma": "none"
       }
+    ],
+    "camelcase": [
+      "error",
+      {
+        "properties": "never"
+      }
     ]
   }
 }
