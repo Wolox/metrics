@@ -1,0 +1,24 @@
+{
+  "name": "@wolox/js-test-coverage-script",
+  "version": "0.0.1",
+  "description": "Script to retrieve lcov test coverage and put into code_coverage.json file in project's root folder.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "test",
+    "coverage",
+    "lcov",
+    "jest"
+  ],
+  "author": "alejobh",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "chalk": "^4.1.1"
+  },
+  "bin": {
+    "js-metrics-test-coverage": "./src/index.js"
+  }
+}
