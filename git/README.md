@@ -49,20 +49,20 @@ The return value consists of a list of the PRs that were closed in the last 14 d
 ```js
 [
   { 
-    reviewTime: 20
-    pickUpTime: 10
+    review_time: 20
+    pick_up_time: 10
   },
   { 
-    reviewTime: 5
-    pickUpTime: 2
+    review_time: 5
+    pick_up_time: 2
   }
 ]
 ```
 
 For the time being we support the following metrics:
 
-- `reviewTime`: Time (in hours) between the PR/MR is created and merged
-- `pickUpTime`: Time (in hours) between the PR/MR is created and it's first reviewed
+- `review_time`: Time (in hours) between the PR/MR is created and merged
+- `pick_up_time`: Time (in hours) between the PR/MR is created and it's first reviewed
 
 **Note**: Metric values can return `undefined`. You should handle that scenario on your own.
 
