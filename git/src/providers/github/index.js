@@ -1,31 +1,25 @@
 const { getRepositoryInfo } = require('./service');
-const { pullRequestLifeSpan, pickUpTime } = require('./metrics');
 
-const { ERROR, gitMetrics } = require('../../constants');
+const { getHoursBetween, getTimelapse } = require('../utils');
 
 module.exports = (authToken) => async (repository, organization) => {
-  const gitData = [];
   try {
     const repositoryInfo = await getRepositoryInfo(repository, organization, authToken);
-    gitData.push({
-      name: gitMetrics.CODE_REVIEW_AVG_TIME,
-      value: pullRequestLifeSpan(repositoryInfo),
-      version: '1.0'
-    });
 
-    gitData.push({
-      name: gitMetrics.PICK_UP_TIME,
-      value: pickUpTime(repositoryInfo),
-      version: '1.0'
-    });
+    const pullRequests = repositoryInfo.data.data.repository.pullRequests.edges;
+    const timelapse = getTimelapse();
+
+    const response = pullRequests
+      .filter((pr) => pr.node.merged && new Date(pr.node.closedAt) > timelapse)
+      .map(({ node }) => ({
+        review_time: getHoursBetween(node.createdAt, node.closedAt),
+        pick_up_time: getHoursBetween(node.createdAt, node.reviews.edges[0].node.createdAt)
+      }));
+
+    return response;
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log(`Error: \n ${e}`);
-    gitData.push({
-      name: 'GITHUB',
-      value: ERROR.REPO_NOT_FOUND
-    });
+    return null;
   }
-
-  return gitData;
 };

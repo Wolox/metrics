@@ -1,33 +1,27 @@
-const { ERROR, gitMetrics } = require('../../constants');
-const { pullRequestLifeSpan, pickUpTime } = require('./metrics');
 const { getRepositoryInfo } = require('./service');
+const { getHoursBetween, getTimelapse } = require('../utils');
 
 module.exports = (authToken) => async (repository, organization) => {
-  const gitData = [];
-
   try {
     const repositoryInfo = await getRepositoryInfo(repository.toLowerCase(), organization, authToken);
 
-    gitData.push({
-      name: gitMetrics.CODE_REVIEW_AVG_TIME,
-      value: pullRequestLifeSpan(repositoryInfo),
-      version: '1.0'
-    });
+    const mergeRequests = repositoryInfo.data.data.project.mergeRequests.edges;
+    const timelapse = getTimelapse();
 
-    gitData.push({
-      name: gitMetrics.PICK_UP_TIME,
-      value: pickUpTime(repositoryInfo),
-      version: '1.0'
-    });
+    const response = mergeRequests
+      .filter((mr) => mr.node.state === 'merged' && mr.node.createdAt > timelapse)
+      .map(({ node }) => ({
+        review_time: getHoursBetween(node.createdAt, node.mergedAt),
+        pick_up_time: getHoursBetween(
+          node.createdAt,
+          node.discussions.edges[0] && node.discussions.edges[0].node.createdAt
+        )
+      }));
+
+    return response;
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log(`Error: \n ${e}`);
-    gitData.push({
-      metric: 'GITLAB',
-      description: 'Error de git',
-      value: ERROR.REPO_NOT_FOUND
-    });
+    return null;
   }
-
-  return gitData;
 };
