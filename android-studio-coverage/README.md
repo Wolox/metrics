@@ -89,6 +89,7 @@ Una vez que tenemos configurada nuestra task de Code Coverage, tenemos que inclu
 Git automaticamente crea hooks, y estos estan en la carpeta oculta *.git* en la *root* del repositorio. Entonces una vez situados en la root del proyecto, nos dirigimos a ```.git/hooks/```, y sobre-escribimos el actual script de *pre-commit* con el que se creo en este repositorio. 
 
 Luego, como JaCoCo genera archivos html, el hook de pre-commit llama a un script que se encarga de leer el html generado, tomar el porcentaje y escribirlo en un archivo json. Dicho script debe ser ubicado en la root del proyecto de Android Studio. 
+El script es *jacocoparser*, y se debe ubicar en la root del proyecto de Android Studio.
 
 # Troubleshooting
 
