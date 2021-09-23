@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+
+import os, subprocess, sys
+
+defaultCoverageFolder = "app/build/reports/coverage/debug/index.html"
+
+# Change this line if the project dir is different
+
+preCommitDir = '' # If the Android Studio Project Folder is not in repo root, set it here. 
+
+os.chdir(f"{os.getcwd()}/{preCommitDir}")
+
+result = os.system('./gradlew jacocoCoverageReport')
+
+if result == 0:
+    os.system(f"./a.out '{defaultCoverageFolder}'")
+    os.system(f"open {defaultCoverageFolder}") 
+    exit(0)
+else:
+    exit(1)
+
