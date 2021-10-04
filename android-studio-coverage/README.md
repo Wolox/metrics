@@ -1,8 +1,8 @@
-# Como utilizarlo 
+# Instructions
 
-## Incluir JaCoCo en el proyecto
+## Include JaCoCo in the project
 
-- 1: En el gradle del proyecto, es decir, en build.gradle(Nombre Proyecto), agregar la version de JaCoCo. Algo asi nos quedaria:
+- 1: In gradle project file -build.gradle(AndroidProjectName)-, add the stable JaCoCo version. At the time writing is the following:
 
 
 ```
@@ -24,9 +24,9 @@ buildscript {
 }
 ```
 
-- 2: Ahora en el gradle de la app (o del modulo que queramos que ejecute el code coverage), agregamos la configuracion necesaria para que arme los reportes. Estos reportes se van a crear a nivel local, y nos van a dar metricas de cada archivo en particular, test ejecutados, coverage, etc.
-En plugins, agregar lo siguiente `id 'jacoco'`.
-Luego, agregar la siguiente task:
+- 2: Now, we must add the task and some extra configuration in order to make gradle produce the JaCoCo reports. Inside the gradle app file -build.gradle(Module)-. These reports will be created locally, (the default .gitignore will prevent from staging them). 
+In `plugins`, add the following `id 'jacoco'`.
+Then, we create the gradle task:
 
 ```
 task jacocoCoverageReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
@@ -51,9 +51,9 @@ tasks.withType(Test) {
 }
 ```
 
-Y por ultimo, dentro del objeto android de las configuraciones, agregar estas propiedades:
+Last, inside android configurations object, add these properties:
 
-Dentro de buildTypes tiene que quedar lo siguiente en debug
+Inside buildTypes, debug should have testCoverageEnabled
 
 ```
 buildTypes {
@@ -64,7 +64,7 @@ buildTypes {
 }
 ```
 
-y en testOptions 
+and testOptions should ignore generated classes, so it would have to be like this 
 
 ```
 testOptions {
@@ -77,27 +77,24 @@ testOptions {
     }
 ```
 
-- 3: Por ultimo, hacemos sync a estos cambios, y ya podemos correr los reportes. Se pueden correr desde el mismo android studio seleccionando la task, o yendo 
-al root del proyecto y en la terminal ejecutar 
+- 3: By now, Android Studio should be suggesting to sync the new gradle files. Sync them, and now we're ready to execute the JaCoCo reports directly from Android Studio, or from the root folder running the following command:
 ```
 ./gradlew jacocoCoverageReport 
 ```
 
-## Agregando el script pre-commit:
+## Include pre-commit script:
 
-Una vez que tenemos configurada nuestra task de Code Coverage, tenemos que incluir el **git-hook** de *pre-commit* (o si se quiere pre-push). 
-Git automaticamente crea hooks, y estos estan en la carpeta oculta *.git* en la *root* del repositorio. Entonces una vez situados en la root del proyecto, nos dirigimos a ```.git/hooks/```, y sobre-escribimos el actual script de *pre-commit* con el que se creo en este repositorio. 
-
-Luego, como JaCoCo genera archivos html, el hook de pre-commit llama a un script que se encarga de leer el html generado, tomar el porcentaje y escribirlo en un archivo json. Dicho script debe ser ubicado en la root del proyecto de Android Studio. 
-El script es *jacocoparser*, y se debe ubicar en la root del proyecto de Android Studio.
+Git allow us to run scripts when commiting or pushing. If you want to include the *pre-commit* **git-hook**, go to the hidden *.git* folder, located at the root of the repository. Once there, go to `hooks` folder, and overwrite the default *pre-commit* hook with the one in this repo.  
+Then, since JaCoCo generates html files, the pre-commit hook calls an script that reads the code-coverage file, takes the coverage percentage, and writes it into a json file. In order to work, the pre-commit searchs that script in the Android Studio root directory. The script name is *jacocoparser*.
 
 # Troubleshooting
 
-- Un error que puede ocurrir (mas que nada en MacOs) es que el gradlew no detecta correctamente la JDK. 
+- A common error that may show is the next one. The cause is that we have multiple JVM's and gradle selects a different JVM when calling it from a script. 
 ```
 > Kotlin could not find the required JDK tools in the Java installation '/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home' used by Gradle. Make sure Gradle is running on a JDK, not JRE.
 ```
-Para solucionarlo vamos al file gradle.properties, y agregamos lo siguiente al final
+
+To fix it, go to gradle.properties file, and add the following line at the end.
 
 ```
 org.gradle.java.home=/Users/'YOUR USER'/Library/Java/JavaVirtualMachines/'YOUR JAVA VERSION'/Contents/Home
