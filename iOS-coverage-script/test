@@ -1,0 +1,19 @@
+#!/bin/bash
+
+PROJECT_DIR="./francesgo-ios"
+XCODE_PROJECT="FrancesGo.xcworkspace"
+BUILD_DIR="${PROJECT_DIR}/BuildTemp"
+SCHEME="FrancesGo"
+BINARY_PATH="${BUILD_DIR}/Products/AdHocDebugDesa-iphonesimulator/francesgo-de"
+
+echo "##### Testing #####"
+xcodebuild test -workspace ${PROJECT_DIR}/${XCODE_PROJECT} -scheme ${SCHEME} -destination 'platform=iOS Simulator,name=iPhone 8,OS=latest' -derivedDataPath ${BUILD_DIR} -enableCodeCoverage YES | xcpretty -s -c
+
+echo "##### Generating report #####"
+TEST_DIR="${BUILD_DIR}/Logs/Test"
+xcrun xccov view --report --json ${TEST_DIR}/$(ls ${TEST_DIR} | tail -1) | python -m json.tool | sed -n '4'p | sed 's/lineCoverage/lines/' | sed 's/"/{ "/' | sed 's/,/ }/' | tee ${PROJECT_DIR}/covertura.json
+
+echo "##### Deleting temporal files #####"
+rm -rf ${BUILD_DIR}
+
+echo "##### Done #####"
