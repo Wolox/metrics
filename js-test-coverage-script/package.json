@@ -1,6 +1,6 @@
 {
   "name": "@wolox/js-test-coverage-script",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Script to retrieve lcov test coverage and put into code_coverage.json file in project's root folder.",
   "main": "src/index.js",
   "scripts": {
