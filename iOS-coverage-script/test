@@ -2,9 +2,12 @@
 
 PROJECT_DIR="path/to/folder"
 XCODE_PROJECT="file.xcworkspace"
-BUILD_DIR="${PROJECT_DIR}/BuildTemp"
 SCHEME="yourScheme"
-BINARY_PATH="${BUILD_DIR}/Products/AdHocDebugDesa-iphonesimulator/your/folder"
+BUILD_CONFIGURATION="yourEnviroment"
+PRODUCT_NAME="yourProductName"
+
+BUILD_DIR="${PROJECT_DIR}/BuildTemp"
+BINARY_PATH="${BUILD_DIR}/Products/${BUILD_CONFIGURATION}-iphonesimulator/${PRODUCT_NAME}"
 
 echo "##### 🚓 Testing #####"
 xcodebuild test \
