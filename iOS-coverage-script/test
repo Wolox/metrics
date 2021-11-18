@@ -23,7 +23,7 @@ else
     echo "🔴 Unit Tests Failed"
     echo "##### Deleting temporal files #####"
     rm -rf ${BUILD_DIR}
-    exit $?
+    exit 1
 fi
 
 echo "##### 📈 Generating report #####"
