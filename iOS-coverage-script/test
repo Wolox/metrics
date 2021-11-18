@@ -3,11 +3,8 @@
 PROJECT_DIR="path/to/folder"
 XCODE_PROJECT="file.xcworkspace"
 SCHEME="yourScheme"
-BUILD_CONFIGURATION="yourEnviroment"
-PRODUCT_NAME="yourProductName"
 
 BUILD_DIR="${PROJECT_DIR}/BuildTemp"
-BINARY_PATH="${BUILD_DIR}/Products/${BUILD_CONFIGURATION}-iphonesimulator/${PRODUCT_NAME}"
 
 echo "##### 🚓 Testing #####"
 xcodebuild test \

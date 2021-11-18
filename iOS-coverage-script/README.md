@@ -10,16 +10,12 @@
 PROJECT_DIR="path/to/folder"
 XCODE_PROJECT="file.xcworkspace"
 SCHEME="yourScheme"
-BUILD_CONFIGURATION="yourEnviroment"
-PRODUCT_NAME="yourProductName"
 ```
 
 Where:
  - PROJECT_DIR: we must add the folder where we have the .xcworkspace.
  - XCODE_PROJECT: we must add the name of the .xcworkspace.
  - SCHEME: we must add the scheme where we will run the tests.
- - BUILD_CONFIGURATION: we can see this in `Edit Scheme -> Test -> Build Configuration`.
- - PRODUCT_NAME: we can see this in `Build Settings -> Product Name`.
 
 
 ## Include pre-commit script:
