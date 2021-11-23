@@ -32,7 +32,7 @@ xcrun xccov view --report --json ${TEST_DIR}/$(ls ${TEST_DIR} |
     sed 's/lineCoverage/lines/' | 
     sed 's/"/{ "/' | 
     sed 's/,/ }/' | 
-    tee ./covertura.json
+    tee ./code_coverage.json
 
 echo "##### Deleting temporal files #####"
 rm -rf ${BUILD_DIR}
