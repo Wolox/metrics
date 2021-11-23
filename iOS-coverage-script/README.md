@@ -25,7 +25,7 @@ Then, the pre-push hook calls an script that reads the code-coverage file, takes
 
 ## Troubleshooting
 
-. A common error that may show is the next one.
+- A common error that may show is the next one.
 ```
 xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer directory 'Library/Developer/CommarndLineTools' is a command line tools instance
 ```
