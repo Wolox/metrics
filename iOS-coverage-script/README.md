@@ -18,7 +18,7 @@ Where:
  - SCHEME: we must add the scheme where we will run the tests.
 
 
-## Include pre-cpushommit script:
+## Include pre-push script:
 
 Git allow us to run scripts when commiting or pushing. If you want to include the *pre-push* **git-hook**, go to the hidden *.git* folder, located at the root of the repository. Once there, go to `hooks` folder, and overwrite the default *pre-commit* hook with the one in this repo.  
 Then, the pre-push hook calls an script that reads the code-coverage file, takes the coverage percentage, and writes it into a json file. In order to work, the pre-push searchs that script in the project root directory. The script name is *test*.
