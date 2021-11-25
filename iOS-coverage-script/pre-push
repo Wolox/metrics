@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Get script working dir
+HOOKS_DIR=$(dirname $0)
+
+IGNORE_CONFLICT_FILE="./ignore-conflict/.gitattributes"
+ROOT_DIR="${HOOKS_DIR}/../../"
+CODE_COVERAGE_FILE="./code_coverage.json"
+
+if [ ! -f ${IGNORE_CONFLICT_FILE} ] ; then
+  mkdir ./ignore-conflict
+  touch ${IGNORE_CONFLICT_FILE}
+  echo "${CODE_COVERAGE_FILE} merge=ours" >> ${IGNORE_CONFLICT_FILE}
+  git add ./ignore-conflict
+  git config merge.ours.driver true
+fi
+
+if [ -f ${ROOT_DIR}/test ] ; then
+  ${ROOT_DIR}/test;
+else
+  exit 1
+fi
