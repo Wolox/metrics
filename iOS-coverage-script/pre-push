@@ -5,7 +5,7 @@ HOOKS_DIR=$(dirname $0)
 
 IGNORE_CONFLICT_FILE="./ignore-conflict/.gitattributes"
 ROOT_DIR="${HOOKS_DIR}/../../"
-CODE_COVERAGE_FILE="./covertura.json"
+CODE_COVERAGE_FILE="./code_coverage.json"
 
 if [ ! -f ${IGNORE_CONFLICT_FILE} ] ; then
   mkdir ./ignore-conflict
