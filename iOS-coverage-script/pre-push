@@ -17,6 +17,8 @@ fi
 
 if [ -f ${ROOT_DIR}/test ] ; then
   ${ROOT_DIR}/test;
+  git add ./${CODE_COVERAGE_FILE}
+  git commit --amend --no-edit
 else
   exit 1
 fi
